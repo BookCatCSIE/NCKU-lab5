@@ -63,13 +63,54 @@ HugeInt:: ~HugeInt(){}
 
 HugeInt HugeInt:: operator +(const HugeInt& n2){
 	HugeInt n1;
+	n1.num[0]=0;
+	for(int i=1;i<30;i++){
+		n1.num[i]=11;
+	}
+	if(this->count > n2.count){
+		n1.count = this->count;
+		for(int i=1;i<=this->count-n2.count;i++){
+			n1.num[i] = this->num[i];
+		}
+		for(int i=this->count-n2.count+1;i<=this->count;i++){
+			n1.num[i] = this->num[i] + n2.num[i-this->count+n2.count];
+		}
+	}else if(this->count < n2.count){
+		n1.count = n2.count;
+		for(int i=1;i<=n2.count-this->count;i++){
+			n1.num[i] = n2.num[i];
+		}
+		for(int i=n2.count-this->count+1;i<=n2.count;i++){
+			n1.num[i] = n2.num[i] + this->num[i-n2.count+this->count];
+		}
+	}else{
+		n1.count = this->count;
+		for(int i=1;i<=this->count;i++){
+			n1.num[i] = this->num[i] + n2.num[i];
+		}
+	}
+	for(int i=n1.count;i>0;i--){
+		n1.num[i-1] += n1.num[i]/10;
+		n1.num[i] %= 10;
+	}
+
 	//n1.num[i] = this->num[i] + n2.num[i];
-	
 	return n1;
 }
 
 HugeInt HugeInt:: operator -(const HugeInt& n2){
 	HugeInt n1;
+	n1.num[0]=0;
+	for(int i=1;i<30;i++){
+		ni.num[i]=11;
+	}
+	if(this->count > n2.count){
+		
+	}else if(this->count < n2.count){
+				 
+	}else{
+
+	}
 	//n1.num[i] = this->num[i] - n2.num[i];
 
 	return n1;
